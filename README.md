@@ -30,7 +30,7 @@ An order tracking app
 
 - [ ] Page Components
   - [ ] NavBar -> login/avatar, signup
-  - [ ] search bar
+  - [ ] search bar, tracking ID
   - [ ]
   - [ ]
   - [ ]
