@@ -4,15 +4,15 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
 const SignupSchema = Yup.object().shape({
-  firstName: Yup.string()
+  fullName: Yup.string()
     .min(2, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
-  lastName: Yup.string()
+  phoneNumber: Yup.string()
     .min(2, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string().password("Invalid password").required("Required"),
 });
 
 export const register = () => (
@@ -20,9 +20,10 @@ export const register = () => (
     <h1>Signup</h1>
     <Formik
       initialValues={{
-        firstName: "",
-        lastName: "",
-        email: "",
+        phoneNumber: "",
+        fullName: "",
+        password: "",
+        confirmPassword: "",
       }}
       validationSchema={SignupSchema}
       onSubmit={(values) => {
@@ -32,16 +33,18 @@ export const register = () => (
     >
       {({ errors, touched }) => (
         <Form>
-          <Field placeholder="firstname" name="firstName" />
-          {errors.firstName && touched.firstName ? (
-            <div>{errors.firstName}</div>
+          <Field placeholder="phoneNumber" name="phoneNumber" />
+          {errors.phoneNumber && touched.phoneNumber ? (
+            <div>{errors.phoneNumber}</div>
           ) : null}
-          <Field name="lastName" />
-          {errors.lastName && touched.lastName ? (
-            <div>{errors.lastName}</div>
+          <Field name="fullName" />
+          {errors.fullName && touched.fullName ? (
+            <div>{errors.fullName}</div>
           ) : null}
-          <Field name="email" type="email" />
-          {errors.email && touched.email ? <div>{errors.email}</div> : null}
+          <Field name="password" type="password" />
+          {errors.password && touched.password ? (
+            <div>{errors.password}</div>
+          ) : null}
           <button type="submit">Submit</button>
         </Form>
       )}
