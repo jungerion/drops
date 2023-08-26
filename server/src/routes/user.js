@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 const UserController = require("../controllers/user");
 
+// We use routes , express seperate routes for the different routes
+
 router.post("/register", UserController.registerNewUser);
 
 router.get("/users/:id", UserController.getUserById);
@@ -31,6 +33,7 @@ router.put("/users/:id", UserController.edituserById);
 // router.delete("/users/:id",async (req, res)=>{
 //  await User.findByIdAndDelete(req.params.id)
 // })
+router.delete("/users/:id", UserController.deleteUserById);
 
 // app.get('/users', (req, res) => {
 //   const searchText= req.query.searchText

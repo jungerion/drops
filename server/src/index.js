@@ -9,7 +9,7 @@ connect();
 require("dotenv").config();
 const port = process.env.PORT;
 
-app.use(UserRouter);
+app.use(UserRouter); // use the Router following the documentation
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
