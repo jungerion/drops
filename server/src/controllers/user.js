@@ -1,8 +1,13 @@
 const User = require("../models/user");
-
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 // We simply have the user controllers
 
 const registerNewUser = async (req, res) => {
+  const hashPass = await bcrypt.hash(req.body.password, saltRounds);
+  // Here, we hash the password using bcrypt, (npm bcrypt)
+  req.body.password = hashPass; // Here, we are sending the hashed password
+  console.log(hashPass); // checking the hashed password
   // Creating new user from the models
   // Here, in the userExists,find,findOne and try hitting from postman,
   const userExist = await User.exists({ phoneNumber: req.body.phoneNumber });
