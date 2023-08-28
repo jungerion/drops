@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { useToast } from "@chakra-ui/react";
 // import styles from "../../styles/register.module.css";
 import styles from "../../styles/register.module.css";
 
@@ -17,12 +18,22 @@ const SignupSchema = Yup.object().shape({
 });
 
 const Register = () => {
-  const handleRegister = (values) => {
+  const toast = useToast();
+  const handleRegister = async (values) => {
     // debugger;
-    fetch("http://localhost:3005/register", {
+    const res = await fetch("http://localhost:3005/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
+    });
+    const data = await res.json();
+    console.log(data);
+    toast({
+      title: data.msg,
+      // description: "We've created your account for you.",
+      status: res.status == 409 ? "warning" : "success",
+      // duration: 9000,
+      isClosable: true,
     });
   };
   return (
@@ -36,7 +47,7 @@ const Register = () => {
           confirmPassword: "",
         }}
         validationSchema={SignupSchema}
-        onSubmit={(values) => {
+        onSubmit={(values, { resetForm }) => {
           // same shape as initial values
           handleRegister(values);
           console.log(values);
