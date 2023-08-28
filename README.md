@@ -2,7 +2,7 @@
 
 Welcome to the Drops repository! Drops is an innovative Order Tracking App designed to provide users with a seamless and efficient way to track their orders, just like popular services such as DHL and FedEx. While still in its initial phases, Drops aims to revolutionize order tracking by offering a user-friendly interface, real-time updates, and comprehensive order management.
 
-![Drops App Logo](client/public/drops_logo.png)
+![Drops App Logo Here](client/public/dropslogo.png)
 
 ## Table of Contents
 
