@@ -3,7 +3,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useToast } from "@chakra-ui/react";
 // import styles from "../../styles/register.module.css";
-import styles from "../../styles/register.module.css";
+// import styles from "../../styles/register.module.css";
 
 const SigninSchema = Yup.object().shape({
   // fullName: Yup.string()
@@ -27,11 +27,18 @@ const Login = () => {
       body: JSON.stringify(values),
     });
     const data = await res.json();
+    // toast({
+    //   title: "Account created.",
+    //   description: "We've created your account for you.",
+    //   status: "success",
+    //   duration: 9000,
+    //   isClosable: true,
+    // });
     toast({
-      title: "Account created.",
-      description: "We've created your account for you.",
-      status: "success",
-      duration: 9000,
+      title: data.msg,
+      // description: "We've created your account for you.",
+      status: res.status == 401 ? "warning" : "success",
+      // duration: 9000,
       isClosable: true,
     });
   };
@@ -40,10 +47,10 @@ const Login = () => {
       <h1>Signin</h1>
       <Formik
         initialValues={{
-          fullName: "",
+          // fullName: "",
           phoneNumber: "",
           password: "",
-          confirmPassword: "",
+          // confirmPassword: "",
         }}
         validationSchema={SigninSchema}
         onSubmit={(values, { resetForm }) => {
@@ -74,9 +81,9 @@ const Login = () => {
               type="confirmPassword"
               placeholder="confirmPassword"
             /> */}
-            {errors.confirmPassword && touched.confirmPassword ? (
+            {/* {errors.confirmPassword && touched.confirmPassword ? (
               <div>{errors.confirmPassword}</div>
-            ) : null}{" "}
+            ) : null}{" "} */}
             <br />
             <button type="submit">Submit</button>
           </Form>

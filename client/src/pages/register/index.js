@@ -3,7 +3,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useToast } from "@chakra-ui/react";
 // import styles from "../../styles/register.module.css";
-import styles from "../../styles/register.module.css";
+// import styles from "../../styles/register.module.css";
 
 const SignupSchema = Yup.object().shape({
   fullName: Yup.string()
@@ -51,6 +51,7 @@ const Register = () => {
           // same shape as initial values
           handleRegister(values);
           console.log(values);
+          resetForm();
         }}
       >
         {({ errors, touched }) => (
