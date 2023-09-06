@@ -2,6 +2,10 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useToast } from "@chakra-ui/react";
+import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { setLoginDetails } from "@/redux/reducerSlices/userSlice";
+import { useRouter } from "next/router";
 // import styles from "../../styles/register.module.css";
 // import styles from "../../styles/register.module.css";
 
@@ -19,6 +23,8 @@ const SigninSchema = Yup.object().shape({
 
 const Login = () => {
   const toast = useToast();
+  const dispatch = useDispatch();
+  const router = useRouter();
   const handleLogin = async (values) => {
     // debugger;
     const res = await fetch("http://localhost:3005/login", {
@@ -27,6 +33,9 @@ const Login = () => {
       body: JSON.stringify(values),
     });
     const data = await res.json();
+    if (data.isLoggedIn) {
+      dispatch(setLoginDetails(data));
+    }
     // toast({
     //   title: "Account created.",
     //   description: "We've created your account for you.",
@@ -86,6 +95,10 @@ const Login = () => {
             ) : null}{" "} */}
             <br />
             <button type="submit">Submit</button>
+            <p>
+              Don't have an account!
+              <Link href="/register">SignUp Now</Link>
+            </p>
           </Form>
         )}
       </Formik>
