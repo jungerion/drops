@@ -47,11 +47,17 @@ const loginUser = async (req, res) => {
         process.env.SECRET_KEY
       );
 
-      res.json({ isLoggedIn: true, msg: "Login successful", token });
+      res.json({
+        isLoggedIn: true,
+        msg: "Login successful",
+        token,
+        userInfo: data,
+      });
       console.log(token);
     } else {
       res.status(404).json({ msg: "creds error" });
     }
+    console.log(data);
   }
 };
 
