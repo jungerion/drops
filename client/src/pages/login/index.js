@@ -35,6 +35,7 @@ const Login = () => {
     const data = await res.json();
     if (data.isLoggedIn) {
       dispatch(setLoginDetails(data));
+      router.push("/");
     }
     // toast({
     //   title: "Account created.",

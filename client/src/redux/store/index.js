@@ -21,4 +21,4 @@ export const store = configureStore({
   middleware: [logger],
 });
 
-export const presistor = persistStore(store);
+export const persistor = persistStore(store);
