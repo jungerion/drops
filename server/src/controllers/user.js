@@ -9,7 +9,7 @@ const registerNewUser = async (req, res) => {
   // Creating new user from the models
   // Here, in the userExists,find,findOne and try hitting from postman,
   const userExist = await User.exists({ phoneNumber: req.body.phoneNumber });
-  console.log(userExist);
+  // console.log(userExist);
 
   if (userExist) {
     // Here, we check if the user exists or not, if yes,
@@ -17,9 +17,10 @@ const registerNewUser = async (req, res) => {
     res.status(409).json({ msg: "user already exists!!" });
   } else {
     // Here, we hash the password using bcrypt, (npm bcrypt)
-    req.body.password = hashPass; // Here, we are sending the hashed password
-
     const hashPass = await bcrypt.hash(req.body.password, saltRounds);
+    req.body.password = hashPass; // Here, we are sending the hashed password
+    // req.body.role = "User";
+
     // console.log(hashPass); // checking the hashed password
 
     console.log(req.body);
@@ -55,15 +56,20 @@ const loginUser = async (req, res) => {
       });
       console.log(token);
     } else {
-      res.status(404).json({ msg: "creds error" });
+      res.status(401).json({ msg: "creds error" });
     }
     console.log(data);
   }
 };
 
-const edituserById = async (req, res) => {
+const updateUserDetailsById = async (req, res) => {
   // for editing the existing user from the models
-  await User.findByIdAndUpdate(req.params.id, req.body);
+  const data = await User.findByIdAndUpdate(req.params.id, req.body);
+  if (data) {
+    res.json({
+      msg: "User details edited",
+    });
+  }
 };
 
 const deleteUserById = async (req, res) => {
@@ -74,8 +80,9 @@ const deleteUserById = async (req, res) => {
 const getUserById = async (req, res) => {
   // for getting the existing users from the models
   const data = await User.findById(req.params.id);
-  res.json({ data });
-  // res.send(req.body.data);
+  if (data) {
+    res.json({ userDetails: data });
+  }
 };
 
 // Here, we export everyting we have
@@ -83,6 +90,6 @@ module.exports = {
   loginUser,
   registerNewUser,
   getUserById,
-  edituserById,
+  updateUserDetailsById,
   deleteUserById,
 };

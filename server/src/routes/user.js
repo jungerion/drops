@@ -8,6 +8,7 @@ const UserController = require("../controllers/user");
 router.post("/register", UserController.registerNewUser);
 
 router.post("/login", UserController.loginUser);
+router.put("/account/:id", UserController.updateUserDetailsById);
 
 router.get("/users/:id", UserController.getUserById);
 // router.post('/users', async(req, res) =>{
@@ -30,7 +31,7 @@ router.get("/users/:id", UserController.getUserById);
 
 //   });
 
-router.put("/users/:id", UserController.edituserById);
+// router.put("/users/:id", UserController.edituserById);
 
 // router.delete("/users/:id",async (req, res)=>{
 //  await User.findByIdAndDelete(req.params.id)
