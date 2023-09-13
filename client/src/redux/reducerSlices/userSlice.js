@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
-  token: "34sdcrfsfcs",
-  id: "",
+  token: " ",
+  id: " ",
   userDetails: {},
-  //   isLoggedIn: false,
+  isLoggedIn: false,
 };
 
 const userSlice = createSlice({
@@ -14,24 +14,26 @@ const userSlice = createSlice({
 
   reducers: {
     setLoginDetails: (state, actions) => {
-      const { token, isLoggedIn, userDetails } = actions.payload;
+      const { token, isLoggedIn, userInfo } = actions.payload;
       return {
         ...state,
         token,
         isLoggedIn,
-        userDetails,
+        userDetails: userInfo,
       };
     },
-
+    changeUserDetails: (state, actions) => {
+      state.userDetails = actions.payload;
+    },
     logout: (state) => {
-      return{
+      return {
         // ...state,
-        ...initialState
-      }
+        ...initialState,
+      };
     },
   },
 });
 
-export const { setLoginDetails, logout } = userSlice.actions;
+export const { setLoginDetails, changeUserDetails, logout } = userSlice.actions;
 
 export default userSlice.reducer;

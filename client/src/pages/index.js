@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { logout } from "@/redux/reducerSlices/userSlice";
 import { useRouter } from "next/router";
+
 const CustomMenu = () => {
   // Renamed Menu to CustomMenu
   const dispatch = useDispatch();
@@ -54,7 +55,7 @@ export default function Home() {
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
     >
       {/* <> {token}</> */}
-      {isLoggedIn ? (
+      {isLoggedIn && userDetails != "Guest-User" ? (
         <CustomMenu />
       ) : (
         <div>
