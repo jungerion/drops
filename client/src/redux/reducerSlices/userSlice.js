@@ -23,7 +23,12 @@ const userSlice = createSlice({
       };
     },
 
-    logout: (state) => {},
+    logout: (state) => {
+      return{
+        // ...state,
+        ...initialState
+      }
+    },
   },
 });
 

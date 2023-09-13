@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Provider } from "react-redux";
-import { persistor, store } from "../redux/store";
+import { persistor, store } from "../redux/store/index";
 import { PersistGate } from "redux-persist/integration/react";
 
 export default function App({ Component, pageProps }) {

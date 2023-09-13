@@ -10,9 +10,12 @@ const persistConfig = {
   storage,
 };
 
+
 const reducer = combineReducers({
   user: userSlice,
 });
+
+
 const persistedReducer = persistReducer(persistConfig, reducer);
 
 export const store = configureStore({
@@ -20,5 +23,7 @@ export const store = configureStore({
 
   middleware: [logger],
 });
+
+
 
 export const persistor = persistStore(store);
