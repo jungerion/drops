@@ -37,6 +37,7 @@ function index() {
           </ModalContent>
         </Modal>
       </div>
+      <input onChange={(e) => console.log(e.target.files[0])} type="file" />
     </div>
   );
 }

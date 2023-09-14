@@ -27,7 +27,7 @@ const Register = () => {
       body: JSON.stringify(values),
     });
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     toast({
       title: data.msg,
       // description: "We've created your account for you.",
@@ -50,7 +50,7 @@ const Register = () => {
         onSubmit={(values, { resetForm }) => {
           // same shape as initial values
           handleRegister(values);
-          console.log(values);
+          // console.log(values);
           resetForm();
         }}
       >

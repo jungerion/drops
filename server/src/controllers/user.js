@@ -5,6 +5,12 @@ const jwt = require("jsonwebtoken");
 // console.log(token);
 // We simply have the user controllers
 
+const uploadImage = async (req, res) => {
+  res.json({
+    msg: "image upload",
+  });
+};
+
 const registerNewUser = async (req, res) => {
   // Creating new user from the models
   // Here, in the userExists,find,findOne and try hitting from postman,
@@ -92,4 +98,5 @@ module.exports = {
   getUserById,
   updateUserDetailsById,
   deleteUserById,
+  uploadImage,
 };
