@@ -2,13 +2,69 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
+const path = require("path");
+const fs = require("fs");
+// const userInfo = require("path");
 // console.log(token);
 // We simply have the user controllers
 
+// const uploadImage = async (req, res) => {
+//   // console.log(req.params, req.file);
+//   if (req.file?.filename) {
+//     await User.findByIdAndUpdate(req.params.id, {
+//       $set: { avatarImage: req.file?.filename },
+//     });
+//   }
+//   res.json({
+//     msg: "image upload",
+//   });
+// };
+
 const uploadImage = async (req, res) => {
-  res.json({
-    msg: "image upload",
-  });
+  try {
+    if (req.file?.filename) {
+      const updatedUser = await User.findByIdAndUpdate(req.params.id, {
+        $set: { avatarImage: req.file?.filename },
+      });
+
+      if (!updatedUser) {
+        return res.status(404).json({ msg: "User not found" });
+      }
+
+      return res.json({ msg: "Image upload successful" });
+    } else {
+      return res.status(400).json({ msg: "No image file uploaded" });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ msg: "Internal server error" });
+  }
+};
+
+const getUserImage = async (req, res) => {
+  const userInfo = await User.findById(req.params.id);
+  // console.log(userInfo);
+  const imagePath = path.join(
+    __dirname,
+    "../../uploads/avatar",
+    userInfo.avatarImage
+  );
+  const defaultImagePath = path.join(
+    __dirname,
+    "../../uploads/avatar",
+    "defaultimg.pmg"
+  );
+  if (fs.existsSync(imagePath)) {
+    res.sendFile(imagePath);
+    console.log(imagePath);
+  } else {
+    sendFile(defaultImagePath);
+  }
+
+  // console.log(req.params);
+  // res.sendFile(
+  //   "/C:/Users/ACER/Desktop/project_drop/drops/server/uploads/avatar/1886773IMG_1263.JPG"
+  // );
 };
 
 const registerNewUser = async (req, res) => {
@@ -99,4 +155,5 @@ module.exports = {
   updateUserDetailsById,
   deleteUserById,
   uploadImage,
+  getUserImage,
 };

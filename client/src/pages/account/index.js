@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-
+import Image from "next/image";
 import {
   Modal,
   ModalOverlay,
@@ -17,9 +17,27 @@ function index() {
   const { userDetails } = useSelector((state) => state.user);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const uploadImage = async (file) => {
+    const formData = new FormData();
+    formData.append("avatar", file);
+    const res = await fetch(
+      "http://localhost:3005/users-image/" + userDetails._id,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    const data = await res.json();
+  };
   return (
     <div>
       <h1>Account</h1>
+      <Image
+        src={"http://localhost:3005/users-image/" + userDetails._id}
+        width={"60"}
+        height={"10"}
+        alt=""
+      />
       <div style={{ padding: "30px", backgroundColor: "pink" }}>
         <p>{userDetails.fullName}</p>
         <p>{userDetails.role}</p>
@@ -37,7 +55,7 @@ function index() {
           </ModalContent>
         </Modal>
       </div>
-      <input onChange={(e) => console.log(e.target.files[0])} type="file" />
+      <input onChange={(e) => uploadImage(e.target.files[0])} type="file" />
     </div>
   );
 }

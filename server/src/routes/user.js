@@ -9,7 +9,8 @@ const storage = multer.diskStorage({
     cb(null, "uploads/avatar/");
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname);
+    const imageName = Math.floor(Math.random() * 10000000) + file.originalname;
+    cb(null, imageName);
   },
 });
 const upload = multer({ storage: storage });
@@ -23,6 +24,8 @@ router.post(
   upload.single("avatar"),
   UserController.uploadImage
 );
+
+router.get("/users-image/:id", UserController.getUserImage);
 
 router.put("/account/:id", UserController.updateUserDetailsById);
 

@@ -20,9 +20,11 @@ const UserForm = () => {
   const { userDetails } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const toast = useToast();
+
   const fetchUserDetails = async () => {
     const res = await fetch("http://localhost:3005/users/" + userDetails._id);
     const data = await res.json();
+    
     if (data) {
       dispatch(changeUserDetails(data.userDetails));
     }
