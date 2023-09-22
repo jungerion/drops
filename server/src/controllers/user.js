@@ -49,6 +49,7 @@ const getUserImage = async (req, res) => {
     "../../uploads/avatar",
     userInfo.avatarImage
   );
+  console.log(imagePath);
   const defaultImagePath = path.join(
     __dirname,
     "../../uploads/avatar",
@@ -97,13 +98,14 @@ const registerNewUser = async (req, res) => {
 const loginUser = async (req, res) => {
   // phoneNumber exist ?
   console.log(req.body);
-  const data = await User.findOne({ phoneNumber: req.body.phoneNumber });
+  const data = await User.findOne({ phoneNumber: req.body.phoneNumber }).lean();
   if (!data) {
     return res.status(404).json({ msg: "user not found" });
   } else {
     // password matched ?
     const isMatched = await bcrypt.compare(req.body.password, data.password);
     if (isMatched) {
+      delete data.password;
       // assign a token (JWT)
       const token = await jwt.sign(
         { phoneNumber: req.body.phoneNumber },

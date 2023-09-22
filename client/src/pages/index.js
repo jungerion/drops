@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@chakra-ui/react"; // Import Button from Chakra UI
 import Login from "./login/index";
+import { useState, useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 import {
@@ -18,6 +19,13 @@ import {
 } from "@chakra-ui/react";
 import { logout } from "@/redux/reducerSlices/userSlice";
 import { useRouter } from "next/router";
+// google map docs
+import {
+  GoogleMap,
+  MarkerF,
+  Autocomplete,
+  useJsApiLoader,
+} from "@react-google-maps/api";
 
 const CustomMenu = () => {
   // Renamed Menu to CustomMenu
@@ -48,12 +56,46 @@ const CustomMenu = () => {
   );
 };
 export default function Home() {
+  // google map docs
+  const [currentPos, setCurrentPos] = useState({
+    lat: 27.700769,
+    lng: 85.30014,
+  });
+
   const { isLoggedIn, userDetails } = useSelector((state) => state.user);
+  //google map docs
+  const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: "AIzaSyDLfjmFgDEt9_G2LXVyP61MZtVHE2M3H-0", // ,
+    // ...otherOptions
+  });
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((latlan) => {
+      const { latitude, longitude } = latlan.coords;
+      setCurrentPos({ lat: latitude, lng: longitude });
+    });
+  }, []);
 
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
     >
+      {/* // google map docs */}
+      {isLoaded && (
+        <GoogleMap
+          id="circle-example"
+          mapContainerStyle={{
+            height: "400px",
+            width: "800px",
+          }}
+          zoom={13}
+          center={{
+            lat: 27.700769,
+            lng: 85.30014,
+          }}
+        >
+          <MarkerF draggable={true} position={currentPos} />
+        </GoogleMap>
+      )}
       {/* <> {token}</> */}
       {isLoggedIn && userDetails != "Guest-User" ? (
         <CustomMenu />

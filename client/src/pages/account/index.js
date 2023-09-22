@@ -33,7 +33,12 @@ function index() {
     <div>
       <h1>Account</h1>
       <Image
-        src={"http://localhost:3005/users-image/" + userDetails._id}
+        src={
+          "http://localhost:3005/users-image/" +
+          userDetails._id +
+          "?key=" +
+          Math.random()
+        }
         width={"60"}
         height={"10"}
         alt=""

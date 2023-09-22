@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
   phoneNumber: { type: String, required: true, unique: true },
   password: String,
   email: String,
-  avatarImage:String,
+  avatarImage: String,
   role: {
     type: String,
     enum: ["Rider", "User", "Admin", "Guest-User"], // enum  for the roles if theres multiple role and it could be any so we use enum
