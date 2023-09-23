@@ -20,12 +20,41 @@ import {
 import { logout } from "@/redux/reducerSlices/userSlice";
 import { useRouter } from "next/router";
 // google map docs
-import {
-  GoogleMap,
-  MarkerF,
-  Autocomplete,
-  useJsApiLoader,
-} from "@react-google-maps/api";
+// import {
+//   GoogleMap,
+//   MarkerF,
+//   Autocomplete,
+//   useJsApiLoader,
+// } from "@react-google-maps/api";
+
+const PlacesCard = (props) => {
+  return (
+    // <div
+    //   onMouseLeave={() => props.setIsSelectionOngoing(false)}
+    //   onMouseOver={() => props.setIsSelectionOngoing(true)}
+    //   className={styles.autocompleteBox}
+    // >
+    {
+      /* {props.searchedPlaceList.length > 0 &&
+        props.searchedPlaceList.map((item) => {
+          return (
+            <div
+              onClick={() => {
+                props.setPickInputAddress(item.formatted);
+                props.setPickUpOpen(false);
+              }}
+              className={styles.autocompleteList}
+            >
+              {item.formatted.length > 15
+                ? item.formatted.substring(0, 15) + "..."
+                : item.formatted}
+            </div>
+          );
+        })} */
+    }
+    // </div>
+  );
+};
 
 const CustomMenu = () => {
   // Renamed Menu to CustomMenu
@@ -55,32 +84,61 @@ const CustomMenu = () => {
     </Menu>
   );
 };
+
 export default function Home() {
   // google map docs
-  const [currentPos, setCurrentPos] = useState({
-    lat: 27.700769,
-    lng: 85.30014,
-  });
+  // const [currentPos, setCurrentPos] = useState({
+  //   lat: 27.700769,
+  //   lng: 85.30014,
+  // });
 
   const { isLoggedIn, userDetails } = useSelector((state) => state.user);
   //google map docs
-  const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyDLfjmFgDEt9_G2LXVyP61MZtVHE2M3H-0", // ,
-    // ...otherOptions
-  });
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((latlan) => {
-      const { latitude, longitude } = latlan.coords;
-      setCurrentPos({ lat: latitude, lng: longitude });
-    });
-  }, []);
+  // const { isLoaded, loadError } = useJsApiLoader({
+  //   // google map API used and libraries: places used
+  //   googleMapsApiKey: "AIzaSyDLfjmFgDEt9_G2LXVyP61MZtVHE2M3H-0", // ,
+  //   libraries: ["places"],
+  // });
+
+  // const [pickInputAddress, setPickInputAddress] = useState("");
+  // const [dropInputAddress, setDropInputAddress] = useState("");
+
+  // const [pickUpOpen, setPickUpOpen] = useState(false);
+  // const [dropOpen, setDropOpen] = useState(false);
+
+  // const [searchedPlaceList, setSearchedPlaceList] = useState([]);
+
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition((latlan) => {
+  //     const { latitude, longitude } = latlan.coords;
+  //     setCurrentPos({ lat: latitude, lng: longitude });
+  //   });
+  // }, []);
+
+  // const generatePlaces = async (text, pick) => {
+  //   if (pick) {
+  //     console.log(pick, "iam pickup");
+  //     setPickUpOpen(true);
+  //     setPickInputAddress(text);
+  //   } else {
+  //     setDropOpen(true);
+  //     setDropInputAddress(text);
+  //   }
+  //   const res = await fetch(
+  //     `https://api.geoapify.com/v1/geocode/autocomplete?text=${text}&format=json&apiKey=a1dd45a7dfc54f55a44b69d125722fcb`
+  //   );
+  //   const data = await res.json();
+  //   if (data.results) {
+  //     setSearchedPlaceList(data.results);
+  //   }
+  // };
 
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
     >
       {/* // google map docs */}
-      {isLoaded && (
+      {/* {isLoaded && (
         <GoogleMap
           id="circle-example"
           mapContainerStyle={{
@@ -95,7 +153,11 @@ export default function Home() {
         >
           <MarkerF draggable={true} position={currentPos} />
         </GoogleMap>
-      )}
+      )} */}
+      {/* Automplete for map input used */}
+      {/* <Autocomplete>
+        <input />
+      </Autocomplete> */}
       {/* <> {token}</> */}
       {isLoggedIn && userDetails != "Guest-User" ? (
         <CustomMenu />

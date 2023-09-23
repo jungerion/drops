@@ -95,7 +95,14 @@ const Login = () => {
               <div>{errors.confirmPassword}</div>
             ) : null}{" "} */}
             <br />
-            <button type="submit">Submit</button>
+            {/* <button type="submit">Submit</button> */}
+            <button
+              onClick={() => router.push("/product")}
+              type="submit"
+              className={styles.submit}
+            >
+              Submit
+            </button>
             <p>
               Don't have an account!
               <Link href="/register">SignUp Now</Link>
