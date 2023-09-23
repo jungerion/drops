@@ -5,7 +5,9 @@ import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
+// import styles from "../../styles/form.module.css";
 import styles from "../../styles/form.module.css";
+
 import Image from "next/image";
 import {
   GoogleMap,
@@ -169,7 +171,7 @@ const Product = () => {
                 <Field
                   className={styles.input}
                   name="productName"
-                  placeholder="Produnct Name"
+                  placeholder="Product Name"
                 />
                 {errors.productName && touched.productName ? (
                   <div>{errors.productName}</div>

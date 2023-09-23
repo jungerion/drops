@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@chakra-ui/react"; // Import Button from Chakra UI
 import Login from "./login/index";
 import { useState, useEffect } from "react";
+// import styles from "../styles/form.module.css";
+// import styles from "../styles/styles.module.css";
+import styles from "../styles/form.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
 import {

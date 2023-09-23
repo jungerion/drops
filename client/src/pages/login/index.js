@@ -6,7 +6,8 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { setLoginDetails } from "@/redux/reducerSlices/userSlice";
 import { useRouter } from "next/router";
-// import styles from "../../styles/register.module.css";
+import styles from "../../styles/styles.module.css";
+
 // import styles from "../../styles/register.module.css";
 
 const SigninSchema = Yup.object().shape({
